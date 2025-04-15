@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Tagz - clone</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/fontawesome.min.css"
+        integrity="sha512-v8QQ0YQ3H4K6Ic3PJkym91KoeNT5S3PnDKvqnwqFD1oiqIl653crGZplPdU5KKtHjO0QKcQ2aUlQZYjHczkmGw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <header>
+        <div class="top-text-banner">!!!GET A CHANCE TO WIN FREE OFFICIAL SIGNED JERSEY ON ORDERING ANY OF OUR OFFICIAL
+            RR HAMPERS!!!</div>
+        <nav>
+            <div class="logo">
+                <a href="./index.html">
+                    <img src="./images/logo.png" alt="Tag   z - Fit. Lit. Snacktivity logo">
+                </a>
+            </div>
+
+            <div class="menu">
+
+                <button class="mobile-menu" aria-label="menu" aria-expanded="false" onclick="openMenu()">
+                    <i class="fa-solid fa-bars" aria-hidden="true"></i>
+                </button>
+
+                <ul>
+
+                    <li><a href="./index.html">Home</a></li>
+                    <li><a href="./shop.html" class="active-link">Shop</a></li>
+                    <li><a href="./gift-hampers.html">Gift Hampers</a></li>
+                    <li><a href="./blog.html">Blog</a></li>
+                    <li><a href="./contact.html">Contact</a></li>
+                    <li><a href="#" aria-label="search"><span aria-hidden="true"><i
+                                    class="fa-solid fa-magnifying-glass"></i></span></a>
+                    </li>
+                    <li><a href="#" aria-label="login"><span aria-hidden="true"><i
+                                    class="fa-solid fa-user"></i></span></a></li>
+                    <li><a href="#" class="desktop-cart" aria-label="add to cart"><span aria-hidden="true"><i
+                                    class="fa-solid fa-cart-shopping"></i></span><span id="cart-total">0</span></a>
+                    </li>
+
+                </ul>
+                <a href="#" class="mobile-cart" aria-label="add to cart"><span aria-hidden="true"><i
+                            class="fa-solid fa-cart-shopping"></i></span><span id="cart-total">0</span></a>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section class="product_Collections">
+            <div class="sub-section">
+                <h1>Assortment</h1>
+                <hr>
+                <div class="Products"></div>
+            </div>
+        </section>
+    </main>
+    <script src="./data.js"></script>
+    <script>
+        // Check if data is loaded correctly
+        //console.log(Products); // Make sure this matches your data.js export
+
+        let productsHTML = Products.map((product) => {
+            return `
+            <div class="card text-center">
+                <div class="cardImage cardI3">
+                    <img src="${product.image_url}" alt="${product.title}" />
+                </div>
+                <div class="cardContent">
+                    <h3>${product.title}</h3>
+                    <div class="price">
+                        ${product.discountPrice ?
+                    `<span class="actualPrice">Rs. ${product.actualPrice}.00</span>
+                             <span class="discountPrice">Rs. ${product.discountPrice}.00</span>`
+                    :
+                    `<span class="currentPrice">Rs. ${product.actualPrice}.00</span>`
+                }
+                    </div>
+                </div>
+                <div>
+                    <button class="add-to-cart" ${product.status === "SOLD OUT" ? "disabled" : ""} data-title="${product.title}" data-price="${(product.discountPrice) ? product.discountPrice : product.actualPrice}">
+                        ${product.status === "SOLD OUT" ? "Sold Out" : "Add to Cart"}
+                    </button>
+                </div>
+                ${product.status && product.status !== "SOLD OUT" ?
+                    `<div class="discountValue">${product.status}</div>` : ""
+                }
+            </div>
+            `;
+        }).join(''); // Convert array to string
+
+        document.querySelector('.Products').innerHTML = productsHTML;
+    </script>
+
+</body>
+<footer>
+    <div class="sub-footer">
+        <div class="column1">
+            <a href="#">
+                <img src="./images/logo.png" alt="" />
+            </a>
+            <p>©TagZ</p>
+        </div>
+        <div class="column2">
+            <p>Info</p>
+            <ul class="footer-quicklinks">
+
+                <li><a href="/search">Search</a></li>
+
+                <li><a href="/pages/about-us">About Us</a></li>
+
+                <li><a href="/pages/talk-to-us">Contact Us</a></li>
+
+                <li><a href="/pages/terms">Terms and Conditions</a></li>
+
+                <li><a href="/pages/privacy-policy">Privacy Policy</a></li>
+
+                <li><a href="/pages/refun-return-policy">Returns and Refunds Policy</a></li>
+
+                <li><a href="/pages/faqs">FAQ</a></li>
+
+                <li><a href="/policies/terms-of-service">Terms of Service</a></li>
+
+                <li><a href="/policies/refund-policy">Refund policy</a></li>
+
+                <li><a href="/collections/bulk-buy-deals">BULK DEALS</a></li>
+
+            </ul>
+        </div>
+        <div class="column3">
+            <p>Subscribe</p>
+            <p class="updatesOffer">Get updated with exclusive offers, latest news and much more.</p>
+            <div class="inputSearch">
+                <input type="text" placeholder="Your email ID" />
+                <button>SUBMIT</button>
+            </div>
+            <ul class="footer-social social-icons grid__item inline-list">
+                <li>
+                    <a class="icon-fallback-text" href="https://www.linkedin.com/company/tagz-foods/"
+                        title="TagZ Foods on Twitter" target="_blank">
+                        <span class="icon icon-linkedin" aria-hidden="true">
+
+                            <i class="fa-brands fa-linkedin"></i>
+                        </span>
+
+                    </a>
+                </li>
+                <li>
+                    <a class="icon-fallback-text" href="https://www.facebook.com/tagzfood/"
+                        title="TagZ Foods on Facebook" target="_blank">
+                        <span class="icon icon-facebook" aria-hidden="true">
+                            <i class="fa-brands fa-square-facebook"></i>
+                        </span>
+
+                    </a>
+                </li>
+                <li>
+                    <a class="icon-fallback-text" href="https://www.instagram.com/Tagzfoods/"
+                        title="TagZ Foods on Instagram" target="_blank">
+                        <span class="icon icon-instagram" aria-hidden="true">
+                            <i class="fa-brands fa-square-instagram"></i>
+                        </span>
+
+                    </a>
+                </li>
+            </ul>
+            <div class="availability">
+                <p>We are also available on</p>
+                <ul>
+                    <li>
+                        <img src="./images/available-zepto.png" alt="available on zepto store" />
+                    </li>
+                    <li>
+                        <img src="./images/available-instamart.png" alt="available on Swiggy Instamart store" />
+                    </li>
+                    <li>
+                        <img src="./images/available-amazon.png" alt="available on amazon store" />
+                    </li>
+                    <li>
+                        <img src="./images/available-blinkit.png" alt="available on blinkit store" />
+                    </li>
+                    <li>
+                        <img src="./images/available-cred.png" alt="available on cred store" />
+                    </li>
+                    <li>
+                        <img src="./images/available-dunzo.png" alt="available on dunzo store" />
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</footer>
+
+<script>
+
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+
+
+    document.getElementById('cart-total').innerHTML = cart.length;
+    document.querySelector('.mobile-cart #cart-total').innerHTML = cart.length
+
+    function saveLocalStorage(cart) {
+
+        localStorage.setItem('cart', JSON.stringify(cart));
+        document.getElementById('cart-total').innerHTML = cart.length;
+
+    }
+
+    function addToCart(price, name) {
+
+        const existingProduct = cart.find((item) => item.name == name);
+
+        if (existingProduct) {
+            existingProduct.quantity++;
+        } else {
+            cart.push({ price, name, quantity: 1 })
+        }
+
+
+
+        saveLocalStorage(cart);
+        alert(`${name} added!`);
+
+    }
+
+    document.addEventListener('click', function (e) {
+        if (e.target.classList.contains('add-to-cart')) {
+            //console.log(e.target.dataset)
+            const price = parseFloat(e.target.dataset.price);
+            const title = e.target.dataset.title;
+            addToCart(price, title);
+        }
+        //console.log(cart)
+
+
+    })
+
+
+
+    function openMenu() {
+        const nav = document.querySelector('nav');
+        const menuButton = document.querySelector('.mobile-menu');
+        const menuIcon = menuButton.querySelector('i');
+
+        // Toggle 'active' class on nav
+        nav.classList.toggle('active');
+
+        // Check if menu is open (has 'active' class)
+        const isOpen = nav.classList.contains('active');
+
+        // Update ARIA attributes
+        menuButton.setAttribute('aria-expanded', isOpen);
+        menuButton.setAttribute('aria-label', isOpen ? 'close' : 'menu');
+
+        // Change icon (from bars to X or vice versa)
+        menuIcon.classList.toggle('fa-bars');
+        menuIcon.classList.toggle('fa-xmark'); // Assuming you're using Font Awesome's X icon
+    }
+
+
+</script>
+
+</html>
